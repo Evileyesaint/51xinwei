@@ -22,14 +22,13 @@
 
 
 #### 开始
-`
+```
 if __name__ == '__main__':
-
     courseId = ''   #课程ID编号
     cookies = ''    #输入cookie
     start = Start(courseId,cookies)
     start.main()
-`
+```
 保存后运行即可,如果报错大概率是cookie不规范亦或是过期导致.
 
 ### 声明
