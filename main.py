@@ -37,10 +37,10 @@ class Start:
         }
 
         response = requests.post(
-            'https://teaching.51xinwei.com/learning/student/studentDataAPI.action',
+            'https://www.51xinwei.com/learning/student/studentDataAPI.action',
             params=params,
             headers=self.headers,
-            data=data,)
+            data=data,verify=False)
         print(response.text)
 
     def GetNotLearnItems(self):
@@ -48,10 +48,10 @@ class Start:
         params = {'functionCode': 'queryVideoLearningProcessDetail',}
         data = {'courseId': self.courseId,}
         response = requests.post(
-            url='https://teaching.51xinwei.com/learning/student/studentDataAPI.action',
+            url='https://www.51xinwei.com/learning/student/studentDataAPI.action',
             params=params,
             headers=self.headers,
-            data=data
+            data=data,verify=False
             )
 
         js = response.json()
@@ -70,10 +70,10 @@ class Start:
         params = {'functionCode': 'queryVideoItemDetail',}
         data = {'courseId': self.courseId,'itemId': itemId,}
         response = requests.post(
-            'https://teaching.51xinwei.com/learning/student/studentDataAPI.action',
+            'https://www.51xinwei.com/learning/student/studentDataAPI.action',
             params=params,
             headers=self.headers,
-            data=data,)
+            data=data,verify=False)
 
     def main(self):
 
