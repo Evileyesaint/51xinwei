@@ -76,9 +76,7 @@ class Start:
             data=data,verify=False)
 
     def main(self):
-
         self.GetNotLearnItems()  #获取未学习项次及其时长
-
         if self.not_learn != []:
             print('开始刷取')
             for i in self.not_learn:
@@ -92,8 +90,6 @@ class Start:
 if __name__ == '__main__':
 
     courseId = ''   #课程ID编号
-    
     cookies = ''    #输入cookie
-
     start = Start(courseId,cookies)
     start.main()
