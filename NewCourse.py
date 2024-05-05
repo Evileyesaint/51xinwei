@@ -67,11 +67,11 @@ class Course:
         '获取学习信息'
 
         LearnTasks = []
-        json_data = {'teachingclassId': self.classId,}
+        json_data = {'teachingClassId': self.classId}
 
         response = requests.post(
             'https://www.51xinwei.com/api/learning-service/admin/studentLearning/getChapterData',
-            # cookies=self.cookies,
+            #cookies=cookies,
             headers=self.headers,
             json=json_data,
         )
