@@ -1,7 +1,13 @@
-2024-4-4 不可用
-
 ## 芯位教育刷网课视频脚本
 一键刷完课程内视频
+
+### 更新
+
+2024-5-6 04:28:55 更新新版课程页面
+
+新版课程页面请使用`NewCourse.py`测试 (最新的课程基本都是新版本)
+
+旧版课程页面请使用`main.py`测试 
 
 ### 原理
 目前`2024-1-24`芯位教育中有个bug，就是可以重复提交观看视频节点数据，从而达到一步刷完视频的效果。
@@ -26,10 +32,10 @@
 #### 开始
 ```
 if __name__ == '__main__':
-    courseId = ''   #课程ID编号
+    classId = ''    #课程ID编号
     cookies = ''    #输入cookie
-    start = Start(courseId,cookies)
-    start.main()
+    course = Course(classId,cookies)
+    course.start()
 ```
 保存后运行即可,如果报错大概率是cookie不规范亦或是过期导致.
 
