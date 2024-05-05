@@ -6,8 +6,6 @@ class Course:
     芯位教育新版刷课脚本
     '''
     def __init__(self,classId,cookies):
-        # self.cookies = cookies
-        print(re.search(r'Authorization=(\S+);',cookies).group(1))
         self.classId = classId
 
         self.headers = {
@@ -30,7 +28,6 @@ class Course:
     def EnterSession(self,session_id):
         response = requests.post(
         'https://www.51xinwei.com/api/learning-service/admin/studentLearning/getSingleChapterData/'+session_id,
-        # cookies=self.cookies,
         headers=self.headers,
         )
         print(response.text)
@@ -51,12 +48,11 @@ class Course:
                 'playbackRate': 1,
                 'recordCount': 9,
                 'startPosition': studyTime,
-                'teachingclassId': self.classId,
+                'teachingClassId': self.classId,
             }
 
             response = requests.post(
                 'https://www.51xinwei.com/api/learning-service/admin/studentLearning/videoLearnProcessReport',
-                cookies=self.cookies,
                 headers=self.headers,
                 json=json_data,
             )
@@ -71,11 +67,9 @@ class Course:
 
         response = requests.post(
             'https://www.51xinwei.com/api/learning-service/admin/studentLearning/getChapterData',
-            #cookies=cookies,
             headers=self.headers,
             json=json_data,
         )
-        print(response.text)
         js = response.json()['data']
         for chapter in js:  #进入章节
             for unit in chapter['children']: #进入单元
@@ -90,22 +84,20 @@ class Course:
                         LearnTasks.append([session_id,studyTime,totalTime])
         return LearnTasks
 
-
-
     def start(self):
         '开始刷课'
 
         LearnTasks = self.getChapterData()
 
         for i in LearnTasks:
-            self.EnterSession(i[0])
+            self.EnterSession(i[0])  #刷课前进入当前课程 不然不允许提交
             self.videoLearnProcessReport(i[0],i[1],i[2])
 
         print('刷课结束亦或未发现未完成任务')
 
 if __name__ == '__main__':
 
-    classId = '8d78bc9b1357076113cf7b48cb3972d7'   #课程ID编号
-    cookies = 'acw_tc=784e2c9117149378338908532e2d3b984c7c8e7079ff99dd10e5438046105c; Authorization=070d1cd2-eb37-46c6-8777-439906f6f5dd; Authorization=070d1cd2-eb37-46c6-8777-439906f6f5dd; loginToken=070d1cd2-eb37-46c6-8777-439906f6f5dd; JSESSIONID=E77BF31F2853DCFBC27317048AFBA377'    #输入cookie
+    classId = ''   #课程ID编号
+    cookies = ''    #输入cookie
     course = Course(classId,cookies)
     course.start()
