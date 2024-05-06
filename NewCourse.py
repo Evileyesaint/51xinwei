@@ -73,15 +73,18 @@ class Course:
         js = response.json()['data']
         for chapter in js:  #进入章节
             for unit in chapter['children']: #进入单元
-                for session in unit['children']: #进入会话
-                    title = session['title']
-                    session_id = session['id']
-                    status = session['status']
-                    studyTime = session['studyTime']
-                    totalTime = session['totalTime']
-                    print('{}   {}   {}   {}   {}'.format(title,session_id,status,totalTime,studyTime))
-                    if status != 2:
-                        LearnTasks.append([session_id,studyTime,totalTime])
+                try:   #跳过单元测试类型
+                    for session in unit['children']: #进入会话
+                        title = session['title']
+                        session_id = session['id']
+                        status = session['status']
+                        studyTime = session['studyTime']
+                        totalTime = session['totalTime']
+                        print('{}   {}   {}   {}   {}'.format(title,session_id,status,totalTime,studyTime))
+                        if status != 2:
+                            LearnTasks.append([session_id,studyTime,totalTime])
+                except:
+                    pass
         return LearnTasks
 
     def start(self):
@@ -94,6 +97,7 @@ class Course:
             self.videoLearnProcessReport(i[0],i[1],i[2])
 
         print('刷课结束亦或未发现未完成任务')
+        input()
 
 if __name__ == '__main__':
 
